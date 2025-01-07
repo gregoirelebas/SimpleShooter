@@ -15,6 +15,12 @@ public:
 	// Sets default values for this character's properties
 	AShooterCharacter();
 
+private:
+	UPROPERTY(EditAnywhere)
+	float UpRotationRate = 10.0f;
+	UPROPERTY(EditAnywhere)
+	float RightRotationRate = 10.0f;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -28,6 +34,7 @@ public:
 
 private:
 	void MoveForward(float AxisValue);
-
 	void MoveRight(float AxisValue);
+	void LookUp(float AxisValue);
+	void LookRight(float AxisValue);
 };
