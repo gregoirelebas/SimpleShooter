@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "ShooterCharacter.generated.h"
 
+class AGun;
+
 UCLASS()
 class SIMPLESHOOTER_API AShooterCharacter : public ACharacter
 {
@@ -20,6 +22,11 @@ private:
 	float UpRotationRate = 10.0f;
 	UPROPERTY(EditAnywhere)
 	float RightRotationRate = 10.0f;
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<AGun> GunClass;
+
+	AGun* Gun;
 
 protected:
 	// Called when the game starts or when spawned
