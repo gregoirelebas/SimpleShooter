@@ -44,4 +44,6 @@ private:
 	void MoveRight(float AxisValue);
 	void LookUp(float AxisValue);
 	void LookRight(float AxisValue);
+
+	void Shoot();
 };

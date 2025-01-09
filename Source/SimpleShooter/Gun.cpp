@@ -30,3 +30,7 @@ void AGun::Tick(float DeltaTime)
 
 }
 
+void AGun::Shoot()
+{
+	UE_LOG(LogTemp, Display, TEXT("Shoot!"));
+}
