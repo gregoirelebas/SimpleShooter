@@ -22,6 +22,9 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	USkeletalMeshComponent* Mesh;
 
+	UPROPERTY(EditDefaultsOnly)
+	UParticleSystem* MuzzleFlash;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
