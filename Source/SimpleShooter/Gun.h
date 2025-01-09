@@ -31,6 +31,9 @@ private:
 	UPROPERTY(EditAnywhere)
 	float ShootRange = 1000.0f;
 
+	UPROPERTY(EditAnywhere)
+	float Damage = 10.0f;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

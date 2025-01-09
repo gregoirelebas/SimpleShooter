@@ -3,6 +3,7 @@
 
 #include "Gun.h"
 #include "Kismet/GameplayStatics.h"
+#include "Engine/DamageEvents.h"
 
 // Sets default values
 AGun::AGun()
@@ -54,5 +55,14 @@ void AGun::Shoot()
 	if (HasShotHit)
 	{
 		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactShotEffect, OutHit.ImpactPoint, OutHit.ImpactNormal.Rotation());
+
+		AActor* HitActor = OutHit.GetActor();
+		if (HitActor != nullptr)
+		{
+			FPointDamageEvent DamageEvent = FPointDamageEvent(Damage, OutHit, End, nullptr);
+			HitActor->TakeDamage(Damage, DamageEvent, OwnerController, Owner);
+
+			GEngine->AddOnScreenDebugMessage(0, 1.0f, FColor::Blue, "Hit another actor");
+		}
 	}
 }
