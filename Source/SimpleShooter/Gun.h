@@ -25,6 +25,9 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	UParticleSystem* MuzzleFlash;
 
+	UPROPERTY(EditDefaultsOnly)
+	UParticleSystem* ImpactShotEffect;
+
 	UPROPERTY(EditAnywhere)
 	float ShootRange = 1000.0f;
 

@@ -53,7 +53,6 @@ void AGun::Shoot()
 	bool HasShotHit = GetWorld()->LineTraceSingleByChannel(OutHit, Location, End, ECollisionChannel::ECC_GameTraceChannel1);
 	if (HasShotHit)
 	{
-		DrawDebugLine(GetWorld(), Location, End, FColor::Red, false, 2.0f);
-		DrawDebugSphere(GetWorld(), OutHit.ImpactPoint, 20.0f, 8, FColor::Red, false, 2.0f);
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactShotEffect, OutHit.ImpactPoint, OutHit.ImpactNormal.Rotation());
 	}
 }
