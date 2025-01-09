@@ -7,7 +7,7 @@
 // Sets default values
 AGun::AGun()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	Root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
@@ -21,7 +21,7 @@ AGun::AGun()
 void AGun::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 }
 
 // Called every frame
@@ -34,4 +34,26 @@ void AGun::Tick(float DeltaTime)
 void AGun::Shoot()
 {
 	UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, Mesh, TEXT("MuzzleFlashSocket"));
+
+	APawn* OwnerPawn = Cast<APawn>(GetOwner());
+	if (OwnerPawn == nullptr)
+		return;
+
+	AController* OwnerController = OwnerPawn->GetController();
+	if (OwnerController == nullptr)
+		return;
+
+	FVector Location;
+	FRotator Rotation;
+	OwnerController->GetPlayerViewPoint(Location, Rotation);
+
+	FVector End = Location + Rotation.Vector() * ShootRange;
+
+	FHitResult OutHit;
+	bool HasShotHit = GetWorld()->LineTraceSingleByChannel(OutHit, Location, End, ECollisionChannel::ECC_GameTraceChannel1);
+	if (HasShotHit)
+	{
+		DrawDebugLine(GetWorld(), Location, End, FColor::Red, false, 2.0f);
+		DrawDebugSphere(GetWorld(), OutHit.ImpactPoint, 20.0f, 8, FColor::Red, false, 2.0f);
+	}
 }

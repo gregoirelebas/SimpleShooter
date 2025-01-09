@@ -25,6 +25,9 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	UParticleSystem* MuzzleFlash;
 
+	UPROPERTY(EditAnywhere)
+	float ShootRange = 1000.0f;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
