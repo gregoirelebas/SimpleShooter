@@ -26,6 +26,12 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<AGun> GunClass;
 
+	UPROPERTY(EditDefaultsOnly)
+	float MaxHealth = 100.0f;
+
+	UPROPERTY(VisibleAnywhere)
+	float Health = 100.0f;
+
 	AGun* Gun;
 
 protected:
@@ -38,6 +44,8 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	float TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 
 private:
 	void MoveForward(float AxisValue);

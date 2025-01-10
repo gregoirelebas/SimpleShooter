@@ -61,8 +61,6 @@ void AGun::Shoot()
 		{
 			FPointDamageEvent DamageEvent = FPointDamageEvent(Damage, OutHit, End, nullptr);
 			HitActor->TakeDamage(Damage, DamageEvent, OwnerController, Owner);
-
-			GEngine->AddOnScreenDebugMessage(0, 1.0f, FColor::Blue, "Hit another actor");
 		}
 	}
 }
