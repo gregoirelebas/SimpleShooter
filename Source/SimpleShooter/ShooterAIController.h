@@ -14,6 +14,11 @@ class SIMPLESHOOTER_API AShooterAIController : public AAIController
 {
 	GENERATED_BODY()
 	
+private:
+	APawn* PlayerPawn;
+
 public:
 	void BeginPlay() override;
+
+	void Tick(float DeltaTime) override;
 };
