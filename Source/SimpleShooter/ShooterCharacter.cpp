@@ -84,3 +84,8 @@ void AShooterCharacter::Shoot()
 {
 	Gun->Shoot();
 }
+
+bool AShooterCharacter::IsDead() const
+{
+	return Health <= 0.0f;
+}
