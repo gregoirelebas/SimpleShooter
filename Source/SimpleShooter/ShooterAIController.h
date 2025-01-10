@@ -14,4 +14,6 @@ class SIMPLESHOOTER_API AShooterAIController : public AAIController
 {
 	GENERATED_BODY()
 	
+public:
+	void BeginPlay() override;
 };
