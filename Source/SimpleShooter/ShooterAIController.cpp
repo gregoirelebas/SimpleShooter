@@ -16,6 +16,11 @@ void AShooterAIController::BeginPlay()
 
 		Blackboard = GetBlackboardComponent();
 		PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+
+		if (Blackboard)
+		{
+			Blackboard->SetValueAsVector(TEXT("StartLocation"), GetPawn()->GetActorLocation());
+		}
 	}
 }
 
