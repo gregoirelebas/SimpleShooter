@@ -53,9 +53,9 @@ private:
 	void LookUp(float AxisValue);
 	void LookRight(float AxisValue);
 
-	void Shoot();
-
 public:
 	UFUNCTION(BlueprintPure)
 	bool IsDead() const;
+
+	void Shoot();
 };
