@@ -6,6 +6,8 @@
 #include "AIController.h"
 #include "ShooterAIController.generated.h"
 
+class UBehaviorTree;
+
 /**
  * 
  */
@@ -19,6 +21,9 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float AcceptanceRadius = 200.0f;
+
+	UPROPERTY(EditDefaultsOnly)
+	UBehaviorTree* AIBehavior;
 
 public:
 	void BeginPlay() override;

@@ -3,12 +3,18 @@
 
 #include "ShooterAIController.h"
 #include <Kismet/GameplayStatics.h>
+#include <BehaviorTree/BehaviorTree.h>
 
 void AShooterAIController::BeginPlay()
 {
 	Super::BeginPlay();
 
 	PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+
+	if (AIBehavior != nullptr)
+	{
+		RunBehaviorTree(AIBehavior);
+	}
 }
 
 void AShooterAIController::Tick(float DeltaTime)
