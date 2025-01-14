@@ -17,8 +17,6 @@ class SIMPLESHOOTER_API AShooterAIController : public AAIController
 	GENERATED_BODY()
 	
 private:
-	APawn* PlayerPawn;
-
 	UPROPERTY(EditAnywhere)
 	float AcceptanceRadius = 200.0f;
 
@@ -27,6 +25,4 @@ private:
 
 public:
 	void BeginPlay() override;
-
-	void Tick(float DeltaTime) override;
 };
