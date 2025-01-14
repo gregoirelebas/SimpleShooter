@@ -4,6 +4,7 @@
 #include "ShooterAIController.h"
 #include <Kismet/GameplayStatics.h>
 #include <BehaviorTree/BehaviorTree.h>
+#include <BehaviorTree/BlackboardComponent.h>
 
 void AShooterAIController::BeginPlay()
 {
@@ -14,6 +15,11 @@ void AShooterAIController::BeginPlay()
 	if (AIBehavior != nullptr)
 	{
 		RunBehaviorTree(AIBehavior);
+		Blackboard = GetBlackboardComponent();
+		if (PlayerPawn && Blackboard != nullptr)
+		{
+			Blackboard->SetValueAsVector(TEXT("PlayerLocation"), PlayerPawn->GetActorLocation());
+		}
 	}
 }
 
