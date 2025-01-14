@@ -17,6 +17,9 @@ class SIMPLESHOOTER_API AShooterAIController : public AAIController
 private:
 	APawn* PlayerPawn;
 
+	UPROPERTY(EditAnywhere)
+	float AcceptanceRadius = 200.0f;
+
 public:
 	void BeginPlay() override;
 
