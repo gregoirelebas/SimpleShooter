@@ -6,6 +6,7 @@
 #include <Components/CapsuleComponent.h>
 
 #include "Gun.h"
+#include "ShooterGameMode.h"
 
 
 // Sets default values
@@ -64,6 +65,12 @@ float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const& Dama
 	{
 		DetachFromControllerPendingDestroy();
 		GetCapsuleComponent()->Deactivate();
+
+		AShooterGameMode* GameMode = GetWorld()->GetAuthGameMode<AShooterGameMode>();
+		if (GameMode)
+		{
+			GameMode->PawnKilled(this);
+		}
 	}
 
 	return DamageAmount;
