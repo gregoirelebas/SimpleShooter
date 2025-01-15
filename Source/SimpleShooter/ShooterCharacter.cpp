@@ -3,7 +3,10 @@
 
 #include "ShooterCharacter.h"
 
+#include <Components/CapsuleComponent.h>
+
 #include "Gun.h"
+
 
 // Sets default values
 AShooterCharacter::AShooterCharacter()
@@ -56,6 +59,12 @@ float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const& Dama
 
 	Health = FMath::Clamp(Health - DamageAmount, 0.0f, MaxHealth);
 	GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Red, FString::Printf(TEXT("%f"), Health));
+
+	if (IsDead())
+	{
+		DetachFromControllerPendingDestroy();
+		GetCapsuleComponent()->Deactivate();
+	}
 
 	return DamageAmount;
 }
