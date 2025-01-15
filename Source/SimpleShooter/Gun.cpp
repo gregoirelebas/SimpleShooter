@@ -51,7 +51,11 @@ void AGun::Shoot()
 	FVector End = Location + Rotation.Vector() * ShootRange;
 
 	FHitResult OutHit;
-	bool HasShotHit = GetWorld()->LineTraceSingleByChannel(OutHit, Location, End, ECollisionChannel::ECC_GameTraceChannel1);
+	FCollisionQueryParams Params;
+	Params.AddIgnoredActor(this);
+	Params.AddIgnoredActor(GetOwner());
+
+	bool HasShotHit = GetWorld()->LineTraceSingleByChannel(OutHit, Location, End, ECollisionChannel::ECC_GameTraceChannel1, Params);
 	if (HasShotHit)
 	{
 		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactShotEffect, OutHit.ImpactPoint, OutHit.ImpactNormal.Rotation());
