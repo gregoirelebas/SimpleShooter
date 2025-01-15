@@ -5,7 +5,13 @@
 
 void AKillEmAllGameMode::PawnKilled(APawn* PawnKilled)
 {
-	Super::PawnKilled(PawnKilled);
+	Super::PawnKilled(PawnKilled);	
 
-	GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Blue, TEXT("Killed a pawn!"));
+	APlayerController* PlayerController = Cast<APlayerController>(PawnKilled->GetController());
+	if (PlayerController) //Pawn was a player
+	{
+		PlayerController->GameHasEnded(nullptr, false);
+
+
+	}
 }
