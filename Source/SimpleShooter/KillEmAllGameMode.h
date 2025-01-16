@@ -14,6 +14,9 @@ class SIMPLESHOOTER_API AKillEmAllGameMode : public AShooterGameMode
 {
 	GENERATED_BODY()
 	
+private:
+	void EndGame(bool HasPlayerWon);
+
 public:
 	void PawnKilled(APawn* PawnKilled) override;
 };
