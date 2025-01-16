@@ -3,6 +3,7 @@
 
 #include "KillEmAllGameMode.h"
 #include <EngineUtils.h>
+#include "ShooterAIController.h"
 
 void AKillEmAllGameMode::EndGame(bool HasPlayerWon)
 {
@@ -17,6 +18,26 @@ void AKillEmAllGameMode::PawnKilled(APawn* PawnKilled)
 {
 	Super::PawnKilled(PawnKilled);
 
-	bool HasPlayerWon = Cast<APlayerController>(PawnKilled->GetController()) == nullptr;
-	EndGame(HasPlayerWon);
+	bool IsPlayerDead = Cast<APlayerController>(PawnKilled->GetController()) != nullptr;
+	if (IsPlayerDead)
+	{
+		EndGame(false);
+	}
+	else
+	{
+		bool AreAllDead = true;
+		for (AShooterAIController* ShooterAIController : TActorRange<AShooterAIController>(GetWorld()))
+		{
+			if (!ShooterAIController->IsDead()) //One of them is still alive
+			{
+				AreAllDead = false;
+				break;
+			}
+		}
+
+		if (AreAllDead)
+		{
+			EndGame(true);
+		}
+	}
 }

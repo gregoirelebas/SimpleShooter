@@ -4,6 +4,18 @@
 #include "ShooterPlayerController.h"
 #include <Blueprint/UserWidget.h>
 
+void AShooterPlayerController::DisplayEndScreen(TSubclassOf<UUserWidget> EndScreenClass)
+{
+	if (EndScreenClass)
+	{
+		UUserWidget* EndScreen = CreateWidget(this, EndScreenClass, TEXT("End screen"));
+		if (EndScreen)
+		{
+			EndScreen->AddToViewport();
+		}
+	}
+}
+
 void AShooterPlayerController::GameHasEnded(AActor* EndGameFocus, bool bIsWinner)
 {
 	Super::GameHasEnded(EndGameFocus, bIsWinner);
@@ -13,12 +25,12 @@ void AShooterPlayerController::GameHasEnded(AActor* EndGameFocus, bool bIsWinner
 	FTimerHandle RestartTimer;
 	GetWorldTimerManager().SetTimer(RestartTimer, this, &APlayerController::RestartLevel, RestartDelay);
 
-	if (EndScreenClass)
+	if (bIsWinner)
 	{
-		UUserWidget* EndScreen = CreateWidget(this, EndScreenClass, TEXT("End screen"));
-		if (EndScreen)
-		{
-			EndScreen->AddToViewport();
-		}
+		DisplayEndScreen(WinScreenClass);
+	}
+	else
+	{
+		DisplayEndScreen(LooseScreenClass);		
 	}
 }

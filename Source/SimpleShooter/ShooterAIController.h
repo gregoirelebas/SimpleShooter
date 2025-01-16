@@ -25,4 +25,6 @@ private:
 
 public:
 	void BeginPlay() override;
+
+	bool IsDead() const;
 };
