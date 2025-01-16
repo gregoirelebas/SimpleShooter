@@ -6,6 +6,8 @@
 #include "GameFramework/PlayerController.h"
 #include "ShooterPlayerController.generated.h"
 
+class UUserWidget;
+
 /**
  * 
  */
@@ -17,6 +19,9 @@ class SIMPLESHOOTER_API AShooterPlayerController : public APlayerController
 private:
 	UPROPERTY(EditAnywhere)
 	float RestartDelay = 5.0f;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UUserWidget> EndScreenClass;
 
 public:
 	virtual void GameHasEnded(class AActor* EndGameFocus = nullptr, bool bIsWinner = false) override;
