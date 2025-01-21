@@ -34,13 +34,11 @@ private:
 	UPROPERTY(EditAnywhere)
 	float Damage = 10.0f;
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+private:
+	AController* GetOwnerController() const;
+
+	bool TryGunTrace(FHitResult& HitResult, FVector& ShootDirection);
 
 public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
 	void Shoot();
 };
