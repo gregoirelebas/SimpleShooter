@@ -26,8 +26,16 @@ private:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<UUserWidget> WinScreenClass;
 
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UUserWidget> HUDScreenClass;
+	
+	UUserWidget* HUDScreen;
+
 private:
 	void DisplayEndScreen(TSubclassOf<UUserWidget> EndScreenClass);
+
+protected:
+	void BeginPlay() override;
 
 public:
 	virtual void GameHasEnded(class AActor* EndGameFocus = nullptr, bool bIsWinner = false) override;

@@ -16,6 +16,19 @@ void AShooterPlayerController::DisplayEndScreen(TSubclassOf<UUserWidget> EndScre
 	}
 }
 
+void AShooterPlayerController::BeginPlay()
+{
+	Super::BeginPlay();
+	if (HUDScreenClass)
+	{
+		HUDScreen = CreateWidget(this, HUDScreenClass, TEXT("HUD"));
+		if (HUDScreen)
+		{
+			HUDScreen->AddToViewport();
+		}
+	}
+}
+
 void AShooterPlayerController::GameHasEnded(AActor* EndGameFocus, bool bIsWinner)
 {
 	Super::GameHasEnded(EndGameFocus, bIsWinner);
@@ -25,12 +38,17 @@ void AShooterPlayerController::GameHasEnded(AActor* EndGameFocus, bool bIsWinner
 	FTimerHandle RestartTimer;
 	GetWorldTimerManager().SetTimer(RestartTimer, this, &APlayerController::RestartLevel, RestartDelay);
 
+	if (HUDScreen)
+	{
+		HUDScreen->RemoveFromViewport();
+	}
+
 	if (bIsWinner)
 	{
 		DisplayEndScreen(WinScreenClass);
 	}
 	else
 	{
-		DisplayEndScreen(LooseScreenClass);		
+		DisplayEndScreen(LooseScreenClass);
 	}
 }
