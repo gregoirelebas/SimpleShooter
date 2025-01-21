@@ -26,6 +26,12 @@ private:
 	UParticleSystem* MuzzleFlash;
 
 	UPROPERTY(EditDefaultsOnly)
+	USoundBase* MuzzleSound;
+
+	UPROPERTY(EditDefaultsOnly)
+	USoundBase* ImpactSound;
+
+	UPROPERTY(EditDefaultsOnly)
 	UParticleSystem* ImpactShotEffect;
 
 	UPROPERTY(EditAnywhere)
